@@ -1,6 +1,7 @@
 package com.example.myalgorithm
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +27,12 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+
+        var util: Util = Util()
+        val arr2 = intArrayOf(1, 2, 3)
+        Log.e("jinguangyue", "removeDuplicates===" + util.removeDuplicates(arr2))
+
     }
 }
 
