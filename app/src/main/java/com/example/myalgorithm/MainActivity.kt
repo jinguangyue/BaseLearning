@@ -33,6 +33,11 @@ class MainActivity : ComponentActivity() {
         val arr2 = intArrayOf(1, 2, 3)
         Log.e("jinguangyue", "removeDuplicates===" + util.removeDuplicates(arr2))
 
+
+        val maxprice = intArrayOf(1, 2, 3, 4, 5)
+
+        Log.e("jinguangyue", "maxProfit===" + util.maxProfit(maxprice))
+
     }
 }
 

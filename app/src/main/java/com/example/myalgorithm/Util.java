@@ -1,9 +1,13 @@
 package com.example.myalgorithm;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Util {
@@ -20,7 +24,6 @@ public class Util {
      * 解释：需要合并 [1,2,3] 和 [2,5,6] 。
      * 合并结果是 [1,2,2,3,5,6] ，其中斜体加粗标注的为 nums1 中的元素。
      *
-     * 来源：力扣（LeetCode）
      * 链接：https://leetcode.cn/problems/merge-sorted-array
      * @param nums1
      * @param m
@@ -59,11 +62,83 @@ public class Util {
     }
 
     /**
-     * 获取股票最大利润
+     * 获取股票最大利润 12345
      * @param prices
      * @return
      */
     public int maxProfit(int[] prices) {
+        int result = 0;
 
+        for (int i=1; i<prices.length; i++) {
+            if (prices[i-1] < prices[i]) {
+                result += prices[i] - prices[i-1];
+            }
+        }
+        return result;
+    }
+
+    public int singleNumber(int[] nums) {
+//        Arrays.sort(nums);
+//        int length = nums.length;
+//        if (length > 1) {
+//            if (nums[0] != nums[1]) {
+//                return nums[0];
+//            }
+//
+//            if (nums[length - 2] != nums[length - 1]) {
+//                return nums[length - 1];
+//            }
+//        } else {
+//            return nums[0];
+//        }
+//        for (int i=2; i<nums.length; i++) {
+//            if (nums[i-2] != nums[i-1] && nums[i-1] != nums[i]) {
+//                return nums[i-1];
+//            }
+//        }
+        int length = nums.length;
+        int result = nums[0];
+        for (int i=1; i<length; i++) {
+            result ^= nums[i];
+        }
+
+        return result;
+    }
+
+    /**
+     * 两个数组的交集
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public int[] intersect(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            intersect(nums2, nums1);
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num: nums1) {
+            int count = map.getOrDefault(num, 0) + 1;
+            map.put(num, count);
+        }
+
+        int[] intersects = new int[nums1.length];
+        int index = 0;
+
+        for (int num : nums2) {
+            int count = map.getOrDefault(num, 0);
+            if (count > 0) {
+                intersects[index] = num;
+                index++;
+                count--;
+                if (count > 0) {
+                    map.put(num, count);
+                } else {
+                    map.remove(num);
+                }
+            }
+        }
+
+        return Arrays.copyOfRange(intersects, 0, index);
     }
 }
