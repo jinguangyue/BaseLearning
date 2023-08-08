@@ -62,6 +62,31 @@ public class Util {
     }
 
     /**
+     * 数组重复元素
+     * @param nums
+     * @return
+     */
+    public boolean containsDuplicate(int nums[]) {
+//        Arrays.sort(nums);
+//        for (int i=0; i<nums.length - 1; i++) {
+//            if (nums[i] == nums[i+1]) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+
+        Set<Integer> set = new HashSet<>();
+        for (int i=0; i<nums.length; i++) {
+            if (!set.add(nums[i])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * 获取股票最大利润 12345
      * @param prices
      * @return
@@ -141,4 +166,36 @@ public class Util {
 
         return Arrays.copyOfRange(intersects, 0, index);
     }
+
+    /**
+     * 旋转数组
+     * @param nums
+     * @param k
+     */
+    public void rotate(int[] nums, int k) {
+        // 1234567 7654321 3  (i + k) % n
+//        k %= nums.length;
+//        reverse(nums, 0, nums.length - 1);
+//        reverse(nums, 0, k - 1);
+//        reverse(nums, k, nums.length - 1);
+
+
+        int[] newArry = new int[nums.length];
+        for (int i=0; i<nums.length; i++) {
+            newArry[(i+k)%nums.length] = nums[i];
+        }
+
+        System.arraycopy(newArry, 0, nums, 0, nums.length);
+    }
+
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
 }
