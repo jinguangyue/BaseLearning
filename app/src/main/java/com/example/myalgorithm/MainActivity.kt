@@ -23,7 +23,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
                 }
             }
         }
@@ -38,21 +37,7 @@ class MainActivity : ComponentActivity() {
 
         Log.e("jinguangyue", "maxProfit===" + util.maxProfit(maxprice))
 
-    }
-}
+        Log.e("jinguangyue", "reverse---int===" + util.reverse(1534236469).toString());
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyAlgorithmTheme {
-        Greeting("Android")
     }
 }

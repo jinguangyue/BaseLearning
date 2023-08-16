@@ -218,4 +218,248 @@ public class Util {
         digits[0] = 1;
         return digits;
     }
+
+    /**
+     * 移动0的元素到末尾 [0, 1, 0, 3, 12]
+     * @param nums
+     */
+    public void moveZeroes(int[] nums) {
+        int n = nums.length;
+        if (n <= 1) {
+            return;
+        }
+
+        int i = 0;
+        int j = 0;
+
+        while (i < n) {
+            if (nums[i] != 0) {
+                int temp = nums[j];
+                nums[j] = nums[i];
+                nums[i] = temp;
+                j++;
+            }
+            i++;
+        }
+    }
+
+
+    /**
+     * [3, 2, 4] target=6
+     * 两数之和
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i=0; i<nums.length; i++) {
+            if (map.containsKey(nums[i]) && i != map.get(nums[i])) {
+                return new int[]{map.get(nums[i]), i};
+            }
+            map.put(target - nums[i], i);
+        }
+
+        return null;
+    }
+
+
+    /**
+     * 数独有效性验证
+     * @param board
+     * @return
+     */
+    public boolean isValidSudoku(char[][] board) {
+//        int[][] rows = new int[9][9];
+//        int[][] columes = new int[9][9];
+//        int[][][] subboxs = new int[3][3][9];
+//        for (int i=0; i<9; i++) {
+//            for (int j=0; j<9; j++) {
+//                char c = board[i][j];
+//                if (c != '.') {
+//                    int index = c - '0' - 1; // 表示数组下标
+//                    rows[i][index]++;
+//                    columes[j][index]++;
+//                    subboxs[i/3][j/3][index]++;
+//                    if (rows[i][index] > 1 || columes[j][index] > 1 || subboxs[i/3][j/3][index] > 1) {
+//                        return false;
+//                    }
+//                }
+//            }
+//        }
+//
+//        return true;
+
+        int[] rows = new int[10];
+        int[] columes = new int[10];
+        int[] boxs = new int[10];
+        for (int i=0; i<9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char c = board[i][j];
+                if (c != '.') {
+                    int index = c - '0' - 1; // 表示数组下标
+                    // 0 3 6   0 1 2
+                    int idx = i/3 * 3 + j/3;
+                    if ((rows[i] >> index & 1) == 1 || (columes[j] >> index & 1) == 1 || (boxs[idx] >> index & 1) == 1 ) {
+                        return false;
+                    }
+
+                    rows[i] |= (1 << index);
+                    columes[j] |= (1 << index);
+                    boxs[idx] |= (1 << index);
+
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 矩阵旋转 90度 关键点在于找到规律
+     * @param matrix
+     */
+    public void rotate(int[][] matrix) {
+//        int n = matrix.length;
+//        int[][] matrixNew = new int[n][n];
+//        for (int i=0; i<n; i++) {
+//            for (int j=0; j<n; j++) {
+//                matrixNew[j][n - i - 1] = matrix[i][j];
+//            }
+//        }
+//
+//        for (int i=0; i<n; i++) {
+//            for (int j=0; j<n; j++) {
+//                matrix[i][j] = matrixNew[i][j];
+//            }
+//        }
+
+//        int n = matrix.length;
+//        for (int i=0; i<n/2; i++) {
+//            for (int j=0; j<(n+1)/2; j++) {
+//                int temp = matrix[i][j];
+//                matrix[i][j] = matrix[n - j - 1][i];
+//                matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];
+//                matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];
+//                matrix[j][n - i - 1] = temp;
+//            }
+//        }
+
+        /**
+         * 先水平翻转一发
+         */
+        int n = matrix.length;
+        for (int i=0; i<n/2; i++) {
+            for (int j=0; j<n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[n - i - 1][j];
+                matrix[n - i - 1][j] = temp;
+            }
+        }
+
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<i; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+
+    /**
+     * 字符串翻转
+     * @param s
+     */
+    private void reverseString(char[] s) {
+        int start = 0;
+        int end = s.length - 1;
+        while (start < end) {
+            char temp = s[start];
+            s[start] = s[end];
+            s[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    /**
+     * 整数翻转
+     * @param x
+     * @return
+     */
+    public int reverse(int x) {
+//        boolean isFu = false;
+//        if (x < 0) {
+//            isFu = true;
+//            x = Math.abs(x);
+//        }
+//        String intStr = String.valueOf(x);  // 将 int 转换为字符串
+//
+//        int[] intArray = new int[intStr.length()];  // 创建数组，大小为字符串的长度
+//
+//        for (int i = 0; i < intStr.length(); i++) {
+//            intArray[i] = Character.getNumericValue(intStr.charAt(i));  // 将字符转换为数字并存储在数组中
+//        }
+//
+//        int start = 0;
+//        int end = intArray.length - 1;
+//        while (start < end) {
+//            int temp = intArray[start];
+//            intArray[start] = intArray[end];
+//            intArray[end] = temp;
+//            start++;
+//            end--;
+//        }
+//
+//        String result = "";
+//
+//        for (int i=0; i<intArray.length; i++) {
+//            result += intArray[i];
+//        }
+//        int resultInt = 0;
+//        try {
+//            resultInt = Integer.parseInt(result);
+//        } catch (Exception e) {
+//            return resultInt;
+//        }
+//
+//        if (isFu) {
+//            return - resultInt;
+//        }
+//
+//        return resultInt;
+
+
+        int result = 0;
+        while (x != 0) {
+            if (result < Integer.MIN_VALUE / 10 || result > Integer.MAX_VALUE / 10) {
+                return 0;
+            }
+
+            int temp = x % 10;
+            x = x / 10;
+            result = result * 10 + temp;
+        }
+
+        return result;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
