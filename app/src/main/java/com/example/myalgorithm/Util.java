@@ -443,6 +443,113 @@ public class Util {
 
         return result;
     }
+
+    /**
+     * 第一个不重复的字符
+     * @param s
+     * @return
+     */
+    private int firstUniqChar(String s){
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i=0; i<s.length(); i++) {
+            char c = s.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        Set<Character> set = map.keySet();
+        for (int i=0; i<s.length(); i++) {
+            char c = s.charAt(i);
+            if (map.get(c) == 1) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+
+    /**
+     * 有效的字母异位词
+     * @param s
+     * @param t
+     * @return
+     */
+    private boolean isAnagram(String s, String t) {
+
+        /**
+         * 自己写的
+         */
+//        if (s.length() != t.length()) {
+//            return false;
+//        }
+//
+//        Map<Character, Integer> maps = new HashMap<>();
+//        for (int i=0; i<s.length(); i++) {
+//            char c = s.charAt(i);
+//            maps.put(c, maps.getOrDefault(c, 0) + 1);
+//        }
+//
+//
+//        for (int i=0; i<t.length(); i++) {
+//            char c = t.charAt(i);
+//            if (maps.containsKey(c)) {
+//                Integer a = maps.getOrDefault(c, 0);
+//                maps.put(c, a - 1);
+//
+//                if (a == 1) {
+//                    maps.remove(c);
+//                }
+//            }
+//        }
+//
+//        if (maps.size() == 0) {
+//            return true;
+//        }
+//
+//        return false;
+
+
+        String temp = s + t;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i=0; i<temp.length(); i++) {
+            char c = temp.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        for (Character key : map.keySet()) {
+            Integer value = map.get(key);
+            if (value % 2 != 0) {
+                return false;
+            }
+        }
+
+        return true;
+
+
+//        /**
+//         * 看题解写的
+//         */
+//
+//        if (s.length() != t.length()) {
+//            return false;
+//        }
+//
+//        int[] alpha = new int[26];
+//        for (int i=0; i<s.length(); i++) {
+//            char c = s.charAt(i);
+//            char d = t.charAt(i);
+//            alpha[c - 'a']++;
+//            alpha[d - 'a']--;
+//        }
+//
+//        for (int i=0; i<alpha.length; i++) {
+//            if (alpha[i] != 0) {
+//                return false;
+//            }
+//        }
+//
+//        return true;
+    }
 }
 
 
