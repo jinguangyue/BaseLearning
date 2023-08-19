@@ -1,5 +1,6 @@
 package com.example.myalgorithm;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -550,6 +551,85 @@ public class Util {
 //
 //        return true;
     }
+
+    /**
+     * 验证回文串
+     * @param s
+     * @return
+     */
+    private boolean isPalindrome(String s) {
+        int start = 0;
+        int end = s.length() - 1;
+        while (start < end) {
+            while (start < end && !Character.isLetterOrDigit(s.charAt(start))) {
+                start++;
+            }
+            while (start < end && !Character.isLetterOrDigit(s.charAt(end))) {
+                end--;
+            }
+            char str = Character.toLowerCase(s.charAt(start));
+            char en = Character.toLowerCase(s.charAt(end));
+            if ((str) != (en)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * 字符串转换整数 atoi
+     * @param s
+     * @return
+     */
+    public int myAtoi(String s) {
+        char[] chars = s.toCharArray();
+        int length = chars.length;
+        int index = 0;
+        if (length == 0) {
+            return index;
+        }
+        while (index < length && chars[index] == ' ') {
+            index++;
+        }
+
+        if (index == length) {
+            return 0;
+        }
+
+        int sign = 1;
+        if (chars[index] == '-') {
+            sign = -1;
+            index++;
+        } else if (chars[index] == '+') {
+            index++;
+            sign = 1;
+        }
+
+        int res = 0;
+        while (index < length) {
+            char cur = chars[index];
+            if (cur > '9' || cur < '0') {
+                break;
+            }
+
+            if (res < Integer.MIN_VALUE / 10 || res == Integer.MIN_VALUE/10 && cur - '0' > -(Integer.MIN_VALUE % 10)) {
+                return Integer.MIN_VALUE;
+            } else if (res > Integer.MAX_VALUE / 10 || res == Integer.MAX_VALUE/10 && cur - '0'> Integer.MAX_VALUE % 10) {
+                return Integer.MAX_VALUE;
+            }
+
+            res = res * 10 + sign * (cur - '0');
+            index++;
+        }
+
+        return res;
+    }
+
 }
 
 
