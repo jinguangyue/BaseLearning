@@ -40,7 +40,9 @@ class MainActivity : ComponentActivity() {
 //        Log.e("jinguangyue", "reverse---int===" + util.reverse(1534236469).toString());
 
 
-        util.myAtoi(" ");
+//        util.myAtoi(" ")
+
+        Log.e("jinguangyue", "result===" + util.kmpSearch("ABABABABCABABABABCABABABABC", "ABABCABAB"))
 
     }
 }

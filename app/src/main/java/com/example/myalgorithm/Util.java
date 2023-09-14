@@ -630,6 +630,83 @@ public class Util {
         return res;
     }
 
+    public int strStr(String haystack, String needle) {
+        if (haystack.equals(needle)) {
+            return 0;
+        }
+        int n = haystack.length();
+        int m = needle.length();
+        for (int i=0; i <= n-m; i++) {
+            int a = i;
+            int b = 0;
+
+            while (b < m && haystack.charAt(a) == needle.charAt(b)) {
+                b++;
+                a++;
+            }
+
+            if (b == m) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+
+    /**
+     * kmp 寻找匹配串
+     * @param text
+     * @param pattern
+     * @return
+     */
+    public int kmpSearch(String text, String pattern) {
+        int[] partialMatchTable = buildPartialMatchTable(pattern);
+        int textIndex = 0; // 指向文本串
+        int patternIndex = 0; // 指向模式串
+
+        while (textIndex < text.length()) {
+            if (text.charAt(textIndex) == pattern.charAt(patternIndex)) {
+                if (patternIndex == pattern.length() - 1) {
+                    return textIndex - patternIndex; // 找到匹配，返回匹配的起始位置
+                }
+                textIndex++;
+                patternIndex++;
+            } else {
+                if (patternIndex != 0) {
+                    patternIndex = partialMatchTable[patternIndex - 1]; // 回退到部分匹配表的值
+                } else {
+                    textIndex++;
+                }
+            }
+        }
+
+        return -1; // 未找到匹配
+    }
+
+    /**
+     * 构建匹配串
+     * @param pattern
+     * @return
+     */
+    public static int[] buildPartialMatchTable(String pattern) {
+        int[] table = new int[pattern.length()];
+        int lengthOfPreviousLongestPrefixSuffix = 0; // 用于记录前一个位置的最长相同前缀后缀的长度
+
+        for (int i = 1; i < pattern.length(); i++) {
+            while (lengthOfPreviousLongestPrefixSuffix > 0
+                    && pattern.charAt(i) != pattern.charAt(lengthOfPreviousLongestPrefixSuffix)) {
+                lengthOfPreviousLongestPrefixSuffix = table[lengthOfPreviousLongestPrefixSuffix - 1]; // 回退到前一个位置的最长相同前缀后缀的长度
+            }
+            if (pattern.charAt(i) == pattern.charAt(lengthOfPreviousLongestPrefixSuffix)) {
+                lengthOfPreviousLongestPrefixSuffix++; // 找到相同的字符，增加最长相同前缀后缀的长度
+            }
+            table[i] = lengthOfPreviousLongestPrefixSuffix;
+        }
+
+        return table;
+    }
+
 }
 
 
