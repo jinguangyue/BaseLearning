@@ -735,12 +735,37 @@ public class Util {
         ListNode(int x) {
             val = x;
         }
+
+        ListNode(int x, ListNode n) {
+            this.val = val;
+            this.next = n;
+        }
     }
 
     class Solution {
         public void deleteNode(ListNode node) {
             node.val = node.next.val;
             node.next = node.next.next;
+        }
+
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            ListNode dummy = new ListNode(0, head);
+            ListNode first = head;
+            for (int i=0; i<n; i++) {
+                first = first.next;
+            }
+
+            ListNode last = dummy;
+
+            while (first != null) {
+                first = first.next;
+                last = last.next;
+            }
+
+            last.next = last.next.next;
+            ListNode result = dummy.next; // 头节点
+
+            return result;
         }
     }
 
