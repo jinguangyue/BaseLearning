@@ -15,17 +15,18 @@ public class Util {
 
     /**
      * 给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
-     *
+     * <p>
      * 请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。
-     *
+     * <p>
      * 注意：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。
-     *
+     * <p>
      * 输入：nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
      * 输出：[1,2,2,3,5,6]
      * 解释：需要合并 [1,2,3] 和 [2,5,6] 。
      * 合并结果是 [1,2,2,3,5,6] ，其中斜体加粗标注的为 nums1 中的元素。
-     *
+     * <p>
      * 链接：https://leetcode.cn/problems/merge-sorted-array
+     *
      * @param nums1
      * @param m
      * @param nums2
@@ -34,8 +35,8 @@ public class Util {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
 
         int length = nums1.length;
-        for (int i=0; i<n; i++) {
-            nums1[length-n+i] = nums2[i];
+        for (int i = 0; i < n; i++) {
+            nums1[length - n + i] = nums2[i];
         }
 
         Arrays.sort(nums1);
@@ -44,13 +45,14 @@ public class Util {
 
     /**
      * 删除数组重复项
+     *
      * @param nums
      * @return
      */
     public int removeDuplicates(int[] nums) {
-        int a = 1,b=1;
+        int a = 1, b = 1;
         while (a < nums.length) {
-            if (nums[a-1] != nums[a]) {
+            if (nums[a - 1] != nums[a]) {
                 nums[b] = nums[a];
                 b++;
 
@@ -64,6 +66,7 @@ public class Util {
 
     /**
      * 数组重复元素
+     *
      * @param nums
      * @return
      */
@@ -78,7 +81,7 @@ public class Util {
 //        return false;
 
         Set<Integer> set = new HashSet<>();
-        for (int i=0; i<nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (!set.add(nums[i])) {
                 return true;
             }
@@ -89,15 +92,16 @@ public class Util {
 
     /**
      * 获取股票最大利润 12345
+     *
      * @param prices
      * @return
      */
     public int maxProfit(int[] prices) {
         int result = 0;
 
-        for (int i=1; i<prices.length; i++) {
-            if (prices[i-1] < prices[i]) {
-                result += prices[i] - prices[i-1];
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i - 1] < prices[i]) {
+                result += prices[i] - prices[i - 1];
             }
         }
         return result;
@@ -124,7 +128,7 @@ public class Util {
 //        }
         int length = nums.length;
         int result = nums[0];
-        for (int i=1; i<length; i++) {
+        for (int i = 1; i < length; i++) {
             result ^= nums[i];
         }
 
@@ -133,6 +137,7 @@ public class Util {
 
     /**
      * 两个数组的交集
+     *
      * @param nums1
      * @param nums2
      * @return
@@ -143,7 +148,7 @@ public class Util {
         }
 
         Map<Integer, Integer> map = new HashMap<>();
-        for (int num: nums1) {
+        for (int num : nums1) {
             int count = map.getOrDefault(num, 0) + 1;
             map.put(num, count);
         }
@@ -170,6 +175,7 @@ public class Util {
 
     /**
      * 旋转数组
+     *
      * @param nums
      * @param k
      */
@@ -182,8 +188,8 @@ public class Util {
 
 
         int[] newArry = new int[nums.length];
-        for (int i=0; i<nums.length; i++) {
-            newArry[(i+k)%nums.length] = nums[i];
+        for (int i = 0; i < nums.length; i++) {
+            newArry[(i + k) % nums.length] = nums[i];
         }
 
         System.arraycopy(newArry, 0, nums, 0, nums.length);
@@ -202,11 +208,12 @@ public class Util {
 
     /**
      * 数组加一算法
+     *
      * @param digits
      * @return
      */
     public int[] plusOne(int[] digits) {
-        for (int i=digits.length - 1; i >= 0; i--) {
+        for (int i = digits.length - 1; i >= 0; i--) {
             if (digits[i] == 9) {
                 digits[i] = 0;
             } else {
@@ -222,6 +229,7 @@ public class Util {
 
     /**
      * 移动0的元素到末尾 [0, 1, 0, 3, 12]
+     *
      * @param nums
      */
     public void moveZeroes(int[] nums) {
@@ -248,13 +256,14 @@ public class Util {
     /**
      * [3, 2, 4] target=6
      * 两数之和
+     *
      * @param nums
      * @param target
      * @return
      */
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i=0; i<nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (map.containsKey(nums[i]) && i != map.get(nums[i])) {
                 return new int[]{map.get(nums[i]), i};
             }
@@ -267,6 +276,7 @@ public class Util {
 
     /**
      * 数独有效性验证
+     *
      * @param board
      * @return
      */
@@ -294,14 +304,14 @@ public class Util {
         int[] rows = new int[10];
         int[] columes = new int[10];
         int[] boxs = new int[10];
-        for (int i=0; i<9; i++) {
+        for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 char c = board[i][j];
                 if (c != '.') {
                     int index = c - '0' - 1; // 表示数组下标
                     // 0 3 6   0 1 2
-                    int idx = i/3 * 3 + j/3;
-                    if ((rows[i] >> index & 1) == 1 || (columes[j] >> index & 1) == 1 || (boxs[idx] >> index & 1) == 1 ) {
+                    int idx = i / 3 * 3 + j / 3;
+                    if ((rows[i] >> index & 1) == 1 || (columes[j] >> index & 1) == 1 || (boxs[idx] >> index & 1) == 1) {
                         return false;
                     }
 
@@ -318,6 +328,7 @@ public class Util {
 
     /**
      * 矩阵旋转 90度 关键点在于找到规律
+     *
      * @param matrix
      */
     public void rotate(int[][] matrix) {
@@ -350,16 +361,16 @@ public class Util {
          * 先水平翻转一发
          */
         int n = matrix.length;
-        for (int i=0; i<n/2; i++) {
-            for (int j=0; j<n; j++) {
+        for (int i = 0; i < n / 2; i++) {
+            for (int j = 0; j < n; j++) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[n - i - 1][j];
                 matrix[n - i - 1][j] = temp;
             }
         }
 
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<i; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[j][i];
                 matrix[j][i] = temp;
@@ -369,6 +380,7 @@ public class Util {
 
     /**
      * 字符串翻转
+     *
      * @param s
      */
     private void reverseString(char[] s) {
@@ -385,6 +397,7 @@ public class Util {
 
     /**
      * 整数翻转
+     *
      * @param x
      * @return
      */
@@ -447,18 +460,19 @@ public class Util {
 
     /**
      * 第一个不重复的字符
+     *
      * @param s
      * @return
      */
-    private int firstUniqChar(String s){
+    private int firstUniqChar(String s) {
         Map<Character, Integer> map = new HashMap<>();
-        for (int i=0; i<s.length(); i++) {
+        for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
         Set<Character> set = map.keySet();
-        for (int i=0; i<s.length(); i++) {
+        for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (map.get(c) == 1) {
                 return i;
@@ -471,6 +485,7 @@ public class Util {
 
     /**
      * 有效的字母异位词
+     *
      * @param s
      * @param t
      * @return
@@ -512,7 +527,7 @@ public class Util {
 
         String temp = s + t;
         Map<Character, Integer> map = new HashMap<>();
-        for (int i=0; i<temp.length(); i++) {
+        for (int i = 0; i < temp.length(); i++) {
             char c = temp.charAt(i);
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
@@ -554,6 +569,7 @@ public class Util {
 
     /**
      * 验证回文串
+     *
      * @param s
      * @return
      */
@@ -583,6 +599,7 @@ public class Util {
 
     /**
      * 字符串转换整数 atoi
+     *
      * @param s
      * @return
      */
@@ -617,9 +634,9 @@ public class Util {
                 break;
             }
 
-            if (res < Integer.MIN_VALUE / 10 || res == Integer.MIN_VALUE/10 && cur - '0' > -(Integer.MIN_VALUE % 10)) {
+            if (res < Integer.MIN_VALUE / 10 || res == Integer.MIN_VALUE / 10 && cur - '0' > -(Integer.MIN_VALUE % 10)) {
                 return Integer.MIN_VALUE;
-            } else if (res > Integer.MAX_VALUE / 10 || res == Integer.MAX_VALUE/10 && cur - '0'> Integer.MAX_VALUE % 10) {
+            } else if (res > Integer.MAX_VALUE / 10 || res == Integer.MAX_VALUE / 10 && cur - '0' > Integer.MAX_VALUE % 10) {
                 return Integer.MAX_VALUE;
             }
 
@@ -636,7 +653,7 @@ public class Util {
         }
         int n = haystack.length();
         int m = needle.length();
-        for (int i=0; i <= n-m; i++) {
+        for (int i = 0; i <= n - m; i++) {
             int a = i;
             int b = 0;
 
@@ -656,6 +673,7 @@ public class Util {
 
     /**
      * kmp 寻找匹配串
+     *
      * @param text
      * @param pattern
      * @return
@@ -686,6 +704,7 @@ public class Util {
 
     /**
      * 构建匹配串
+     *
      * @param pattern
      * @return
      */
@@ -705,6 +724,24 @@ public class Util {
         }
 
         return table;
+    }
+
+
+    //      Definition for singly-linked list.
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
+    class Solution {
+        public void deleteNode(ListNode node) {
+            node.val = node.next.val;
+            node.next = node.next.next;
+        }
     }
 
 }
