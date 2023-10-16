@@ -781,7 +781,6 @@ public class Util {
         head.next.next = head;
         head.next = null;
         return newHead;
-
     }
 
 }
