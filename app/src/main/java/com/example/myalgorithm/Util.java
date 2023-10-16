@@ -727,70 +727,62 @@ public class Util {
     }
 
 
-    //      Definition for singly-linked list.
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-
-        ListNode(int x, ListNode n) {
-            this.val = val;
-            this.next = n;
-        }
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
     }
 
-    class Solution {
-        public void deleteNode(ListNode node) {
-            node.val = node.next.val;
-            node.next = node.next.next;
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode first = head;
+        for (int i = 0; i < n; i++) {
+            first = first.next;
         }
 
-        public ListNode removeNthFromEnd(ListNode head, int n) {
-            ListNode dummy = new ListNode(0, head);
-            ListNode first = head;
-            for (int i=0; i<n; i++) {
-                first = first.next;
-            }
+        ListNode last = dummy;
 
-            ListNode last = dummy;
-
-            while (first != null) {
-                first = first.next;
-                last = last.next;
-            }
-
-            last.next = last.next.next;
-            ListNode result = dummy.next; // 头节点
-
-            return result;
+        while (first != null) {
+            first = first.next;
+            last = last.next;
         }
 
+        last.next = last.next.next;
+        ListNode result = dummy.next; // 头节点
 
-        /**
-         * 1-2-3-4-5-6
-         * @param head
-         * @return
-         */
-        public ListNode reverseList(ListNode head) {
-            if (head == null || head.next == null) {
-                return head;
-            }
+        return result;
+    }
 
-            ListNode prev = null;
-            ListNode current = head;
 
-            while (current != null) {
-                ListNode next = current.next;
-                current.next = prev;
-                prev = current;
-                current = next;
-            }
-
-            return prev;
+    /**
+     * 1-2-3-4-5-6
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+        Log.e("jinguangyue", "reverseList");
+        if (head == null || head.next == null) {
+            return head;
         }
+
+//            ListNode prev = null;
+//            ListNode current = head;
+//
+//            while (current != null) {
+//                ListNode next = current.next;
+//                current.next = prev;
+//                prev = current;
+//                current = next;
+//            }
+//            return prev;
+
+
+        ListNode newHead = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+
+        return newHead;
+
     }
 
 }

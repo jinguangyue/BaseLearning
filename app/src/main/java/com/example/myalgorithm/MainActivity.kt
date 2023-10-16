@@ -7,11 +7,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.myalgorithm.ui.theme.MyAlgorithmTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +26,11 @@ class MainActivity : ComponentActivity() {
         }
 
 
+        var head = initializeLinkedList()
+
+
         var util: Util = Util()
+        Log.e("jinguangyue", "result===" + util.reverseList(head).`val`);
 //        val arr2 = intArrayOf(1, 2, 3)
 //        Log.e("jinguangyue", "removeDuplicates===" + util.removeDuplicates(arr2))
 //
@@ -42,7 +44,24 @@ class MainActivity : ComponentActivity() {
 
 //        util.myAtoi(" ")
 
-        Log.e("jinguangyue", "result===" + util.kmpSearch("ABABABABCABABABABCABABABABC", "ABABCABAB"))
+//        Log.e("jinguangyue", "result===" + util.kmpSearch("ABABABABCABABABABCABABABABC", "ABABCABAB"))
 
+    }
+
+    fun initializeLinkedList(): ListNode? {
+        val head = ListNode(1)
+        var current: ListNode = head
+
+        // 添加其他节点
+        current.next = ListNode(2)
+        current = current.next
+        current.next = ListNode(3)
+        current = current.next
+        current.next = ListNode(4)
+        current = current.next
+        current.next = ListNode(5)
+        current = current.next
+        current.next = ListNode(6)
+        return head
     }
 }
