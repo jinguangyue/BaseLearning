@@ -753,38 +753,6 @@ public class Util {
     }
 
 
-    /**
-     * 1-2-3-4-5-6
-     *
-     * @param head
-     * @return
-     */
-    public ListNode reverseList(ListNode head) {
-        Log.e("jinguangyue", "reverseList");
-
-
-//            ListNode prev = null;
-//            ListNode current = head;
-//
-//            while (current != null) {
-//                ListNode next = current.next;
-//                current.next = prev;
-//                prev = current;
-//                current = next;
-//            }
-//            return prev;
-
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode newHead = reverseList(head.next);
-        head.next.next = head;
-        head.next = null;
-        return newHead;
-
-
-
-    }
 
     /**
      * 124
@@ -824,6 +792,75 @@ public class Util {
         prev.next = (list1 == null) ? list2 : list1;
         return preload.next;
 
+    }
+
+
+    /**
+     * 1-2-3-4-5-6
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+
+
+//            ListNode prev = null;
+//            ListNode current = head;
+//
+//            while (current != null) {
+//                ListNode next = current.next;
+//                current.next = prev;
+//                prev = current;
+//                current = next;
+//            }
+//            return prev;
+
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode newHead = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+
+    }
+
+    public boolean isPalindrome(ListNode head) {
+        if (head == null) {
+            return true;
+        }
+
+        boolean result = true;
+        ListNode firstHalfEnd = endOfFirstHalf(head);
+        ListNode secondHalfEnd = reverseList(firstHalfEnd.next);
+
+
+        ListNode p1 = head;
+        ListNode p2 = secondHalfEnd;
+
+        while (result && p1 != null && p2 != null) {
+            if (p1.val != p2.val) {
+                result = false;
+            }
+
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        firstHalfEnd.next = reverseList(secondHalfEnd);
+
+        return result;
+    }
+
+    private ListNode endOfFirstHalf(ListNode head) {
+        ListNode fisrt = head;
+        ListNode last = head;
+        while (last.next != null && last.next.next != null) {
+            fisrt = fisrt.next;
+            last = last.next.next;
+        }
+
+        return fisrt;
     }
 
 }
