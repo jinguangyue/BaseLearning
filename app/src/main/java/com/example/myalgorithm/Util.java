@@ -864,15 +864,32 @@ public class Util {
     }
 
     public boolean hasCycle(ListNode head) {
-        Set<ListNode> set = new HashSet<>();
-        while (head != null) {
-            if (!set.add(head)) {
-                return true;
-            }
-            head = head.next;
+//        Set<ListNode> set = new HashSet<>();
+//        while (head != null) {
+//            if (!set.add(head)) {
+//                return true;
+//            }
+//            head = head.next;
+//        }
+//
+//        return false;
+
+        if (head == null) {
+            return false;
         }
 
-        return false;
+        ListNode p1 = head;
+        ListNode p2 = head.next;
+
+        while (p1 != p2) {
+            if (p2 == null || p2.next == null || p2.next.next == null) {
+                return false;
+            }
+            p1 = p1.next;
+            p2 = p2.next.next;
+        }
+
+        return true;
 
     }
 
