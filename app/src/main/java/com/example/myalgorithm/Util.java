@@ -893,6 +893,31 @@ public class Util {
 
     }
 
+    /**
+     * 二叉树最大深度
+     * @return
+     */
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            if (root.left != null) {
+                Log.e("jinguangyue", "root.left===" + root.left.val);
+            }
+            int left = maxDepth(root.left);
+            Log.e("jinguangyue", "left===" + left);
+            if (root.right != null) {
+                Log.e("jinguangyue", "root.right===" + root.right.val);
+            }
+            int right = maxDepth(root.right);
+            Log.e("jinguangyue", "right===" + right);
+
+            int result = Math.max(left, right) + 1;
+            Log.e("jinguangyue", "result===" + result);
+            return result;
+        }
+    }
+
 }
 
 

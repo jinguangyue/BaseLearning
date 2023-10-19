@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
 
 
         var util: Util = Util()
-        Log.e("jinguangyue", "result===" + util.reverseList(head).`val`);
+//        Log.e("jinguangyue", "result===" + util.reverseList(head).`val`);
 //        val arr2 = intArrayOf(1, 2, 3)
 //        Log.e("jinguangyue", "removeDuplicates===" + util.removeDuplicates(arr2))
 //
@@ -45,6 +45,16 @@ class MainActivity : ComponentActivity() {
 //        util.myAtoi(" ")
 
 //        Log.e("jinguangyue", "result===" + util.kmpSearch("ABABABABCABABABABCABABABABC", "ABABCABAB"))
+
+        var node1 = TreeNode(1)
+        var node2 = TreeNode(2)
+        var node3 = TreeNode(3, node1, node2)
+        var node4 = TreeNode(4)
+        var node5 = TreeNode(5, node3, node4)
+
+        Log.e("jinguangyue", "maxDepth===" +  util.maxDepth(node5))
+
+
 
     }
 
