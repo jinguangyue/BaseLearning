@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 public class Util {
@@ -898,24 +900,49 @@ public class Util {
      * @return
      */
     public int maxDepth(TreeNode root) {
+//        if (root == null) {
+//            return 0;
+//        }
+////        if (root.left != null) {
+////            Log.e("jinguangyue", "root.left===" + root.left.val);
+////        }
+//        int left = maxDepth(root.left);
+////        Log.e("jinguangyue", "left===" + left);
+////        if (root.right != null) {
+////            Log.e("jinguangyue", "root.right===" + root.right.val);
+////        }
+//        int right = maxDepth(root.right);
+////        Log.e("jinguangyue", "right===" + right);
+//
+//        int result = Math.max(left, right) + 1;
+////        Log.e("jinguangyue", "result===" + result);
+//        return result;
         if (root == null) {
             return 0;
-        } else {
-            if (root.left != null) {
-                Log.e("jinguangyue", "root.left===" + root.left.val);
-            }
-            int left = maxDepth(root.left);
-            Log.e("jinguangyue", "left===" + left);
-            if (root.right != null) {
-                Log.e("jinguangyue", "root.right===" + root.right.val);
-            }
-            int right = maxDepth(root.right);
-            Log.e("jinguangyue", "right===" + right);
-
-            int result = Math.max(left, right) + 1;
-            Log.e("jinguangyue", "result===" + result);
-            return result;
         }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        int ans = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            while (size > 0) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+
+                size--;
+            }
+            ans++;
+        }
+
+        return ans;
     }
 
 }
