@@ -922,7 +922,6 @@ public class Util {
         }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-
         int ans = 0;
 
         while (!queue.isEmpty()) {
@@ -944,6 +943,31 @@ public class Util {
 
         return ans;
     }
+
+    /**
+     * 有效二叉树判断
+     * @param root
+     * @return
+     */
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean isValidBST(TreeNode root, long low, long upper) {
+        if (root == null) {
+            return true;
+        }
+        if (root.val <= low || root.val >= upper) {
+            return false;
+        }
+
+        return isValidBST(root.left, low, root.val) && isValidBST(root.right, root.val, upper);
+    }
+
 
 }
 
