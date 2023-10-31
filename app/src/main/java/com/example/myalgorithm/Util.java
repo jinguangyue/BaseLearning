@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 
 public class Util {
@@ -1065,6 +1066,54 @@ public class Util {
 
         return result;
     }
+
+
+    /**
+     * 升序数组转换为平衡二叉树
+     * @param nums
+     * @return
+     */
+    public TreeNode sortedArrayToBst(int[] nums) {
+        return helper(nums, 0 , nums.length - 1);
+    }
+
+    public TreeNode helper(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+
+        int mid = (left + right) / 2;
+
+        TreeNode node = new TreeNode(nums[mid]);
+        node.left = helper(nums, left, mid - 1);
+        node.right = helper(nums, mid + 1, right);
+
+        return node;
+    }
+
+    /**
+     * 使用二分法算出第一个错误的版本
+     * @param n
+     * @return
+     */
+    public int firstBadVersion(int n) {
+        int left = 1;
+        int right = n;
+        while(left < right) {
+            int mid = left + (right - left) / 2;
+            if (isBadVersion(mid)) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+
+    public boolean isBadVersion(int num) {
+        return num % 2 == 0;
+    }
+
 
 }
 
