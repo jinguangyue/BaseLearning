@@ -48,7 +48,7 @@ public class Util {
 
     /**
      * 删除数组重复项
-     *
+     * 122356
      * @param nums
      * @return
      */
@@ -63,6 +63,7 @@ public class Util {
 
             a++;
         }
+
 
         return b;
     }
@@ -756,10 +757,10 @@ public class Util {
     }
 
 
-
     /**
      * 124
      * 134
+     *
      * @param list1
      * @param list2
      * @return
@@ -898,6 +899,7 @@ public class Util {
 
     /**
      * 二叉树最大深度
+     *
      * @return
      */
     public int maxDepth(TreeNode root) {
@@ -947,6 +949,7 @@ public class Util {
 
     /**
      * 有效二叉树判断
+     *
      * @param root
      * @return
      */
@@ -970,9 +973,9 @@ public class Util {
     }
 
 
-
     /**
      * 递归方式判断对称二叉树
+     *
      * @param root1
      * @param root2
      * @return
@@ -991,6 +994,7 @@ public class Util {
 
     /**
      * 对称二叉树判断
+     *
      * @param root
      * @return
      */
@@ -1000,6 +1004,7 @@ public class Util {
 
     /**
      * 使用队列迭代方式判断对称二叉树
+     *
      * @param root1
      * @param root2
      * @return
@@ -1033,6 +1038,7 @@ public class Util {
 
     /**
      * 使用队列做二叉树的层序遍历
+     *
      * @param root
      * @return
      */
@@ -1046,7 +1052,7 @@ public class Util {
         while (!queue.isEmpty()) {
             List<Integer> level = new ArrayList<>();
             int size = queue.size();
-            for (int i=0; i<size; i++) {
+            for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
                 if (node != null) {
                     level.add(node.val);
@@ -1070,11 +1076,12 @@ public class Util {
 
     /**
      * 升序数组转换为平衡二叉树
+     *
      * @param nums
      * @return
      */
     public TreeNode sortedArrayToBst(int[] nums) {
-        return helper(nums, 0 , nums.length - 1);
+        return helper(nums, 0, nums.length - 1);
     }
 
     public TreeNode helper(int[] nums, int left, int right) {
@@ -1093,13 +1100,14 @@ public class Util {
 
     /**
      * 使用二分法算出第一个错误的版本
+     *
      * @param n
      * @return
      */
     public int firstBadVersion(int n) {
         int left = 1;
         int right = n;
-        while(left < right) {
+        while (left < right) {
             int mid = left + (right - left) / 2;
             if (isBadVersion(mid)) {
                 right = mid;
@@ -1114,6 +1122,55 @@ public class Util {
         return num % 2 == 0;
     }
 
+    public int climbStairs(int n) {
+        int p = 0;
+        int q = 0;
+        int r = 1;
+        for (int i=0; i<n; i++) {
+        	p = q;
+            q = r;
+            r = q + p;
+        }
+
+        return r;
+    }
+
+
+    /**
+     * 买卖股票的最大利润，只能一天买，某一天卖的情况
+     * @param prices
+     * @return
+     */
+    public int maxProfitOneDay(int[] prices) {
+        int maxProfit = 0;
+        int min = Integer.MAX_VALUE;
+        for (int i=0; i<prices.length; i++) {
+            if(prices[i] < min) {
+                min = prices[i];
+            } else if (prices[i] - min > maxProfit) {
+                maxProfit = prices[i] - min;
+            }
+        }
+
+        return maxProfit;
+    }
+
+    /**
+     * 最大自序的和
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
+        int pre = 0;
+        int max = nums[0];
+
+        for (int i = 0; i<nums.length; i++) {
+            pre = Math.max(pre + nums[i], nums[i]);
+            max = Math.max(pre, max);
+        }
+
+        return max;
+    }
 
 }
 
