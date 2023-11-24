@@ -1172,6 +1172,94 @@ public class Util {
         return max;
     }
 
+
+    /**
+     * 动态规划解决打家劫舍问题
+     * @param nums
+     * @return
+     */
+    public int rob(int[] nums) {
+
+
+//        int[] dp = new int[nums.length];
+//        dp[0] = nums[0];
+//        dp[1] = Math.max(nums[0], nums[1]);
+//
+//        for (int i=2; i<nums.length; i++) {
+//            dp[i] = Math.max(dp[i-2]+nums[i], dp[i-1]);
+//        }
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int first = nums[0];
+        int second = Math.max(nums[0], nums[1]);
+
+        for (int i=2; i < nums.length; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+
+        return second;
+    }
+
+
+    /**
+     * 打乱数组
+     * 打乱数组的算法在一些应用中是有很实际意义的，特别是在与随机性、模拟、和算法设计相关的领域。以下是一些常见的应用场景：
+     *
+     * 随机化算法： 打乱数组常常被用在设计随机算法时，以确保算法的输出是随机的。例如，在随机化快速排序算法中，通过首先打乱数组，可以避免最坏情况的出现，使得算法的性能更加可预测。
+     *
+     * 模拟实验： 在模拟实验中，如果你希望模拟一种随机的排列或分布，打乱数组是一种常见的手段。例如，在模拟粒子扩散时，可以使用打乱数组来表示粒子的随机运动。
+     *
+     * 游戏开发： 在游戏开发中，打乱数组可以用于创建随机的关卡布局、卡牌游戏中洗牌等情景。通过打乱数组，可以为玩家提供更具挑战性和娱乐性的游戏体验。
+     *
+     * 密码学： 在密码学中，如果需要生成随机的密钥或初始化向量，可以使用打乱数组的方法。
+     *
+     * 在上面提到的打乱数组的实现中，使用的是 Fisher-Yates 洗牌算法，这是一种被广泛接受的高效而简单的打乱数组的方法。这个算法的主要思想是从数组的末尾开始，随机选择一个位置，然后将该位置的元素与当前位置的元素进行交换。这个过程一直持续到数组的开头。这种方法是线性时间的，非常适合打乱数组。
+     */
+    class Solution {
+        int[] nums;
+        int[] original;
+
+        public Solution(int[] nums) {
+            this.nums = nums;
+            this.original = new int[nums.length];
+            System.arraycopy(nums, 0, original, 0, nums.length);
+        }
+
+        public int[] reset() {
+            System.arraycopy(original, 0, nums, 0, original.length);
+            return nums;
+        }
+
+        public int[] shuffle() {
+            List<Integer> list = new ArrayList<>();
+            for (int i=0; i<nums.length; i++) {
+                list.add(nums[i]);
+            }
+
+//            int[] results = new int[nums.length];
+            Random random = new Random();
+            for (int j=0; j<nums.length; j++) {
+//                int a = random.nextInt(list.size());
+//                results[j] = list.remove(a);
+
+                int a = j + random.nextInt(nums.length - j);
+                int temp = nums[j];
+                nums[j] = nums[a];
+                nums[a] = temp;
+            }
+
+//            System.arraycopy(results, 0, nums, 0, results.length);
+            return nums;
+        }
+    }
+
 }
 
 
