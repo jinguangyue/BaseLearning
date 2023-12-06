@@ -55,6 +55,8 @@ class MainActivity : ComponentActivity() {
         Log.e("jinguangyue", "maxDepth===" +  util.maxDepth(node5))
 
 
+        var produceComsumeUtil = ProduceComsumeUtil()
+        produceComsumeUtil.blockingQueueMethod()
 
     }
 
