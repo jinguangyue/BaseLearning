@@ -28,6 +28,25 @@ public class ProduceComsumeUtil {
         new Thread(new Task(THREAD_CONSUME)).start();
     }
 
+    public void testIntegerInt() {
+        Integer a = 1;
+        Integer b = 2;
+        Integer c = 3;
+        Integer d = 3;
+        Integer e = 321;
+        Integer f = 321;
+        Long g = 3L;
+
+        Log.e("jinguangyue", "" + (c == d)); // true
+        Log.e("jinguangyue", "" + (e == f)); // false
+        Log.e("jinguangyue", "" + (c == (a + b))); // true
+        Log.e("jinguangyue", "" + (c.equals(a+b))); // true
+        Log.e("jinguangyue", "" + (g == (a+b))); // true
+        Log.e("jinguangyue", "" + (g.equals(a+b))); // false
+
+
+    }
+
     class Task implements Runnable {
 
         private String name;

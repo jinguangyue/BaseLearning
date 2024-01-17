@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
+import java.util.Stack;
 
 public class Util {
 
@@ -49,6 +51,7 @@ public class Util {
     /**
      * 删除数组重复项
      * 122356
+     *
      * @param nums
      * @return
      */
@@ -736,6 +739,14 @@ public class Util {
         node.next = node.next.next;
     }
 
+
+    /**
+     * 删除链表倒数第n个元素-双指针法
+     *
+     * @param head
+     * @param n
+     * @return
+     */
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0, head);
         ListNode first = head;
@@ -754,6 +765,88 @@ public class Util {
         ListNode result = dummy.next; // 头节点
 
         return result;
+    }
+
+    public ListNode removeNthFromEndForStack(ListNode head, int n) {
+        Deque<ListNode> deque = new LinkedList<>();
+        ListNode dummy = new ListNode(0, head);
+        ListNode cur = dummy;
+        while (cur != null) {
+            deque.push(cur);
+            cur = cur.next;
+        }
+
+        for (int i = 0; i < n; i++) {
+            deque.poll();
+        }
+
+        ListNode node = deque.peek();
+        node.next = node.next.next;
+        ListNode result = dummy.next;
+        return result;
+    }
+
+    /**
+     * 拿到链表长度删除倒数第n个节点
+     *
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEndForLength(ListNode head, int n) {
+        int length = getNodeLength(head);
+        ListNode dummy = new ListNode(0, head);
+        ListNode cur = dummy;
+        for (int i = 0; i < length - n; i++) {
+            cur = cur.next;
+        }
+
+        cur.next = cur.next.next;
+        return dummy.next;
+    }
+
+    /**
+     * 固定从m到n的链表翻转
+     * 1-2-3-4-5
+     * m = 2
+     * n = 4
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode pre = dummy;
+        ListNode cur = head;
+
+
+        for (int i=1; i<m; i++) {
+            pre = cur;
+            cur = cur.next;
+        }
+
+        // pre = 1   cur = 2;
+
+        for (int i=m; i<n; i++) {
+            ListNode temp = cur.next; // 把3存下来
+            cur.next = temp.next; // 2->4
+            temp.next = pre.next; // 3-2-4
+            pre.next = temp; // 1-3-2-4
+        }
+
+        return dummy.next;
+    }
+
+
+    private int getNodeLength(ListNode head) {
+        int length = 0;
+        ListNode cur = head;
+        while (cur != null) {
+            cur = cur.next;
+            length++;
+        }
+        return length;
     }
 
 
@@ -1126,8 +1219,8 @@ public class Util {
         int p = 0;
         int q = 0;
         int r = 1;
-        for (int i=0; i<n; i++) {
-        	p = q;
+        for (int i = 0; i < n; i++) {
+            p = q;
             q = r;
             r = q + p;
         }
@@ -1138,14 +1231,15 @@ public class Util {
 
     /**
      * 买卖股票的最大利润，只能一天买，某一天卖的情况
+     *
      * @param prices
      * @return
      */
     public int maxProfitOneDay(int[] prices) {
         int maxProfit = 0;
         int min = Integer.MAX_VALUE;
-        for (int i=0; i<prices.length; i++) {
-            if(prices[i] < min) {
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < min) {
                 min = prices[i];
             } else if (prices[i] - min > maxProfit) {
                 maxProfit = prices[i] - min;
@@ -1157,6 +1251,7 @@ public class Util {
 
     /**
      * 最大自序的和
+     *
      * @param nums
      * @return
      */
@@ -1164,7 +1259,7 @@ public class Util {
         int pre = 0;
         int max = nums[0];
 
-        for (int i = 0; i<nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             pre = Math.max(pre + nums[i], nums[i]);
             max = Math.max(pre, max);
         }
@@ -1175,6 +1270,7 @@ public class Util {
 
     /**
      * 动态规划解决打家劫舍问题
+     *
      * @param nums
      * @return
      */
@@ -1198,7 +1294,7 @@ public class Util {
         int first = nums[0];
         int second = Math.max(nums[0], nums[1]);
 
-        for (int i=2; i < nums.length; i++) {
+        for (int i = 2; i < nums.length; i++) {
             int temp = second;
             second = Math.max(first + nums[i], second);
             first = temp;
@@ -1211,15 +1307,15 @@ public class Util {
     /**
      * 打乱数组
      * 打乱数组的算法在一些应用中是有很实际意义的，特别是在与随机性、模拟、和算法设计相关的领域。以下是一些常见的应用场景：
-     *
+     * <p>
      * 随机化算法： 打乱数组常常被用在设计随机算法时，以确保算法的输出是随机的。例如，在随机化快速排序算法中，通过首先打乱数组，可以避免最坏情况的出现，使得算法的性能更加可预测。
-     *
+     * <p>
      * 模拟实验： 在模拟实验中，如果你希望模拟一种随机的排列或分布，打乱数组是一种常见的手段。例如，在模拟粒子扩散时，可以使用打乱数组来表示粒子的随机运动。
-     *
+     * <p>
      * 游戏开发： 在游戏开发中，打乱数组可以用于创建随机的关卡布局、卡牌游戏中洗牌等情景。通过打乱数组，可以为玩家提供更具挑战性和娱乐性的游戏体验。
-     *
+     * <p>
      * 密码学： 在密码学中，如果需要生成随机的密钥或初始化向量，可以使用打乱数组的方法。
-     *
+     * <p>
      * 在上面提到的打乱数组的实现中，使用的是 Fisher-Yates 洗牌算法，这是一种被广泛接受的高效而简单的打乱数组的方法。这个算法的主要思想是从数组的末尾开始，随机选择一个位置，然后将该位置的元素与当前位置的元素进行交换。这个过程一直持续到数组的开头。这种方法是线性时间的，非常适合打乱数组。
      */
     class Solution {
@@ -1239,13 +1335,13 @@ public class Util {
 
         public int[] shuffle() {
             List<Integer> list = new ArrayList<>();
-            for (int i=0; i<nums.length; i++) {
+            for (int i = 0; i < nums.length; i++) {
                 list.add(nums[i]);
             }
 
 //            int[] results = new int[nums.length];
             Random random = new Random();
-            for (int j=0; j<nums.length; j++) {
+            for (int j = 0; j < nums.length; j++) {
 //                int a = random.nextInt(list.size());
 //                results[j] = list.remove(a);
 
@@ -1259,6 +1355,78 @@ public class Util {
             return nums;
         }
     }
+
+
+    /**
+     * 二叉树层次遍历
+     * @param root
+     */
+    public void leverOrder(TreeNode root) {
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.offer(root);
+
+        while (!deque.isEmpty()){
+            TreeNode node = deque.poll();
+            if (node == null) {
+                return;
+            }
+
+            if (node.left != null) {
+                deque.offer(node.left);
+            }
+
+            if (node.right != null) {
+                deque.offer(node.right);
+            }
+        }
+    }
+
+
+    /**
+     * 二叉树翻转
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree(TreeNode root) {
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        invertTree(root.left);
+        invertTree(root.right);
+
+        return root;
+    }
+
+
+    /**
+     * 不使用递归二叉树翻转
+     * @param root
+     * @return
+     */
+    public TreeNode invertTreeForQuene(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()){
+            TreeNode current = queue.poll();
+
+            TreeNode temp = current.left;
+            current.left = current.right;
+            current.right = temp;
+
+            if (current.left != null) {
+                queue.offer(current.left);
+            }
+
+            if (current.right != null) {
+                queue.offer(current.right);
+            }
+        }
+
+        return root;
+    }
+
 
 }
 

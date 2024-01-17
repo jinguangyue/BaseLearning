@@ -1,5 +1,6 @@
 package com.example.myalgorithm
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -25,6 +26,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        startActivity(Intent(this, TestTouchEventActivity::class.java))
 
         var head = initializeLinkedList()
 
@@ -56,7 +58,13 @@ class MainActivity : ComponentActivity() {
 
 
         var produceComsumeUtil = ProduceComsumeUtil()
-        produceComsumeUtil.blockingQueueMethod()
+//        produceComsumeUtil.blockingQueueMethod()
+
+        produceComsumeUtil.testIntegerInt();
+
+
+        ThreadsUtil.countDownLatchExample()
+
 
     }
 
