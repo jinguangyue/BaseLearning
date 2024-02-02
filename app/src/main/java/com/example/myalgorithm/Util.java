@@ -18,6 +18,56 @@ import java.util.Stack;
 
 public class Util {
 
+    public void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            // 获取划分位置，左边元素小于基准，右边元素大于基准
+            int pivotIndex = partition(arr, low, high);
+
+            // 对基准左右两部分进行递归排序
+            quickSort(arr, low, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    public int partition(int[] arr, int low, int high) {
+        int pivot = arr[high]; // 选择数组的最后一个元素作为基准
+        System.out.println("jinguangyue-基准 " + pivot);
+        System.out.println("jinguangyue-low " + low);
+        System.out.println("jinguangyue-high " + high);
+        int i = low - 1;
+
+        // 将小于基准的元素移到基准的左边
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+
+        printArray(arr);
+
+        // 将基准元素移到合适的位置
+        swap(arr, i + 1, high);
+
+        // 输出当前步骤的数组状态
+        System.out.println("jinguangyue-Step " + (i + 1) + ":");
+//        printArray(arr);
+
+        return i + 1;
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + "-");
+        }
+    }
+
     /**
      * 给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
      * <p>
