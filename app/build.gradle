@@ -48,6 +48,9 @@ android {
 
 dependencies {
 
+    api 'com.android.tools.build:gradle:3.0.1'
+    api 'com.android.tools.sdk-common:31.0.2'
+
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
@@ -64,4 +67,5 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 }

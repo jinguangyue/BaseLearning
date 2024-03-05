@@ -1,6 +1,6 @@
 package com.example.myalgorithm
 
-import android.os.Bundle
+import  android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -80,6 +80,12 @@ class MainActivity : ComponentActivity() {
 //        testRotateList()
 
 
+        testRetrofit()
+
+    }
+
+    private fun testRetrofit() {
+        TODO("Not yet implemented")
     }
 
     private fun testRotateList() {
