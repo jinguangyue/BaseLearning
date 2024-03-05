@@ -2,12 +2,18 @@ package com.example.myalgorithm
 
 import  android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import com.example.myalgorithm.ui.theme.MyAlgorithmTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -29,6 +35,16 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Hello, Compose!",
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
             }
         }
@@ -85,7 +101,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun testRetrofit() {
-        TODO("Not yet implemented")
     }
 
     private fun testRotateList() {
