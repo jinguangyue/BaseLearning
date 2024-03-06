@@ -18,6 +18,13 @@ import java.util.Stack;
 
 public class Util {
 
+
+    /**
+     * 快速排序
+     * @param arr
+     * @param low
+     * @param high
+     */
     public void quickSort(int[] arr, int low, int high) {
         if (low < high) {
             // 获取划分位置，左边元素小于基准，右边元素大于基准
@@ -30,30 +37,40 @@ public class Util {
     }
 
     public int partition(int[] arr, int low, int high) {
-        int pivot = arr[high]; // 选择数组的最后一个元素作为基准
-        System.out.println("jinguangyue-基准 " + pivot);
+        int pivot = arr[low];
         System.out.println("jinguangyue-low " + low);
         System.out.println("jinguangyue-high " + high);
-        int i = low - 1;
+        System.out.println("jinguangyue-pivot " + pivot);
+        printArray(arr);
+        System.out.println();
 
-        // 将小于基准的元素移到基准的左边
-        for (int j = low; j < high; j++) {
-            if (arr[j] < pivot) {
-                i++;
-                swap(arr, i, j);
+        int left = low + 1;
+        int right = high;
+
+        while (left <= right) {
+            while (left <= right && arr[left] < pivot) {
+                left++;
+            }
+
+            while (left <= right && arr[right] > pivot) {
+                right--;
+            }
+
+            if (left <= right) {
+                swap(arr, left, right);
             }
         }
-
+        System.out.println("jinguangyue-right " + right);
         printArray(arr);
+        System.out.println();
 
-        // 将基准元素移到合适的位置
-        swap(arr, i + 1, high);
+        // low 是基准 把right放在基准位置上 因为经过左右递进之后 right 的位置左侧都是小于基准的 右侧都是大于基准的
+        swap(arr, low, right);
+        printArray(arr);
+        System.out.println();
 
-        // 输出当前步骤的数组状态
-        System.out.println("jinguangyue-Step " + (i + 1) + ":");
-//        printArray(arr);
 
-        return i + 1;
+        return right;
     }
 
     public void swap(int[] arr, int i, int j) {
@@ -116,6 +133,8 @@ public class Util {
 
             a++;
         }
+
+        printArray(nums);
 
 
         return b;
