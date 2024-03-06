@@ -2,12 +2,18 @@ package com.example.myalgorithm
 
 class UtilKotlin {
     public fun bubbleSort(arr: IntArray) {
+
+        var isSwap = false
+
         for (i in 0 until arr.size) {
             for (j in 0 until arr.size - i - 1) {
                 if (arr[j] > arr[j + 1]) {
                     swap(arr, j, j + 1)
+                    isSwap = true
                 }
             }
+
+            if (!isSwap) break
         }
 
         printArray(arr)
