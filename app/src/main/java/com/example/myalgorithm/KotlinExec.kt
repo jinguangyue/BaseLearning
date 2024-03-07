@@ -13,7 +13,15 @@ fun main() {
 
 //    testQuickSort()
 
-    testBubbleSort()
+//    testBubbleSort()
+
+
+    testSelectionSort()
+}
+
+fun testSelectionSort() {
+    val arr = intArrayOf(6, 2, 5, 4, 3, 2, 1, 0)
+    utilKotlin.selectionSort(arr)
 }
 
 fun testBubbleSort() {
