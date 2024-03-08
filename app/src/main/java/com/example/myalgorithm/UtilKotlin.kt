@@ -4,6 +4,22 @@ class UtilKotlin {
 
 
     /**
+     * 插入排序
+     */
+    internal fun insertSort(arr: IntArray) {
+        for (i in 1 until arr.size) {
+            var j = i
+            while (j >= 1 && arr[j] < arr[j-1]) {
+                swap(arr, j, j-1)
+                j--
+            }
+        }
+
+        printArray(arr)
+    }
+
+
+    /**
      * 选择排序算法
      */
     internal fun selectionSort(arr: IntArray) {

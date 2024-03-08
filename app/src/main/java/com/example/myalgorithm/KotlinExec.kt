@@ -16,8 +16,16 @@ fun main() {
 //    testBubbleSort()
 
 
-    testSelectionSort()
+//    testSelectionSort()
+
+    testIntertSort()
 }
+
+fun testIntertSort() {
+    val arr = intArrayOf(6, 2, 5, 4, 3, 2, 1, 0)
+    utilKotlin.insertSort(arr)
+}
+
 
 fun testSelectionSort() {
     val arr = intArrayOf(6, 2, 5, 4, 3, 2, 1, 0)
