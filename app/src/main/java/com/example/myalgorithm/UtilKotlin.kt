@@ -7,12 +7,28 @@ class UtilKotlin {
      * 插入排序
      */
     internal fun insertSort(arr: IntArray) {
+//        for (i in 1 until arr.size) {
+//            var j = i
+//            while (j >= 1 && arr[j] < arr[j-1]) {
+//                swap(arr, j, j-1)
+//                j--
+//            }
+//        }
+
+        // 比较法 2, 5, 6, 4, 3, 2, 1, 0
+        // 比较法 2, 4, 5, 6, 3, 2, 1, 0 先记录i的值，
+        // 每次比较i 到 0 都和i比较，如果比i大，就把值往后挪一步，
+        // 直到遇到比i小的，退出内部循环，把记录的i值复制给最后一次比较的那个 也就是j+1
+        var current = 0
         for (i in 1 until arr.size) {
-            var j = i
-            while (j >= 1 && arr[j] < arr[j-1]) {
-                swap(arr, j, j-1)
+            current = arr[i]
+            var j = i - 1
+            while (j >= 0 && current < arr[j]) {
+                arr[j + 1] = arr[j]
                 j--
             }
+
+            arr[j + 1] = current
         }
 
         printArray(arr)
@@ -95,7 +111,7 @@ class UtilKotlin {
     }
 
     public fun swap(arr: IntArray, i: Int, j: Int) {
-        println("jinguangyue-swap---start:" + "arr[i]:" + arr[i] + "-----" + "arr[j]):" + arr[j])
+//        println("jinguangyue-swap---start:" + "arr[i]:" + arr[i] + "-----" + "arr[j]):" + arr[j])
 
         if (arr[i] != arr[j]) {
             arr[i] = arr[i] xor arr[j]
@@ -103,7 +119,7 @@ class UtilKotlin {
             arr[i] = arr[i] xor arr[j]
         }
 
-        println("jinguangyue-swap---end:" + "arr[i]:" + arr[i] + "-----" + "arr[j]):" + arr[j])
+//        println("jinguangyue-swap---end:" + "arr[i]:" + arr[i] + "-----" + "arr[j]):" + arr[j])
 
         println()
 //        var temp = arr[i]
