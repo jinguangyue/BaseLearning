@@ -8,6 +8,58 @@ class ListNodeUtil {
 
 
         /**
+         * 合并两个有序链表
+         */
+        fun mergeListNodes(node1: ListNode?, node2: ListNode?) : ListNode? {
+            /**
+             * 递归排序两个有序链表
+             */
+//            return if (node1 == null) {
+//                node2
+//            } else if (node2 == null) {
+//                node1
+//            } else if (node1.`val` < node2.`val`) {
+//                node1.next = mergeListNodes(node1.next, node2)
+//                node1
+//            } else {
+//                node2.next = mergeListNodes(node1, node2.next)
+//                node2
+//            }
+
+
+            /**
+             * 循环 排序两个有序链表
+             */
+            var head1 = node1
+            var head2 = node2
+
+            var prev = ListNode(0)
+            var dummy = ListNode(0, prev)
+
+            while (head1 != null && head2 != null) {
+                if (head1.`val` < head2.`val`) {
+                    prev.next = head1
+                    head1 = head1.next
+                } else {
+                    prev.next = head2
+                    head2 = head2.next
+                }
+
+                prev = prev.next
+            }
+
+            if (head1 == null) {
+                prev.next = head2
+            } else {
+                prev.next = head1
+            }
+
+            return dummy.next
+
+        }
+
+
+        /**
          * 删除链表倒数第n个节点
          */
         fun deleteNodeForIndex(node: ListNode, index: Int) : ListNode {
