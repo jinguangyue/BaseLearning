@@ -3,6 +3,41 @@ package com.example.myalgorithm
 class ListNodeUtil {
     companion object {
 
+
+        /**
+         * 删除链表倒数第n个节点
+         */
+        fun deleteNodeForIndex(node: ListNode, index: Int) : ListNode {
+            var dummy = ListNode(0, node)
+            var cur = node
+            var count = 0
+            while (cur != null) {
+                count++
+                if (cur.next == null) break
+                cur = cur.next
+            }
+
+            println("count:${count}")
+
+            var head = dummy.next
+            for (i in 0 until count - index - 1) {
+                head = head.next
+            }
+            println("head:${head.`val`}")
+            head.next = head.next.next
+            return dummy.next
+        }
+
+
+        /**
+         * 删除链表节点
+         */
+        fun deleteNode(node: ListNode) {
+            node.`val` = node.next.`val`
+            node.next = node.next.next
+        }
+
+
         /**
          * 链表反转
          *

@@ -20,10 +20,34 @@ fun main() {
 
 //    testIntertSort()
 
-    testListNode()
+//    testReverseListNode()
+
+//    testDeleteNode()
+
+    testDeleteNodeForIndex()
 }
 
-fun testListNode() {
+fun testDeleteNodeForIndex() {
+    val head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
+    ListNodeUtil.deleteNodeForIndex(head, 2)
+    ListNodeUtil.printList(head)
+}
+
+fun testDeleteNode() {
+    val head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
+    ListNodeUtil.deleteNode(head.next.next)
+    ListNodeUtil.printList(head)
+}
+
+fun testReverseListNode() {
     val head = ListNode(1)
     head.next = ListNode(2)
     head.next.next = ListNode(3)
