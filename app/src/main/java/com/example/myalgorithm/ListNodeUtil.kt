@@ -2,9 +2,38 @@ package com.example.myalgorithm
 
 import java.util.Deque
 import java.util.LinkedList
+import java.util.Queue
 
 class ListNodeUtil {
     companion object {
+
+
+        fun levelOder(node: TreeNode): List<List<Int>> {
+            var queue : Queue<TreeNode> = LinkedList()
+            queue.add(node)
+
+            var result = ArrayList<List<Int>>()
+
+            while (!queue.isEmpty()){
+                var level = ArrayList<Int>()
+                var length = queue.size
+                for (i in 0 until length) {
+                    var treeNode = queue.poll()
+                    level.add(treeNode.`val`)
+                    if (treeNode.left != null) {
+                        queue.add(treeNode.left)
+                    }
+
+                    if (treeNode.right != null) {
+                        queue.add(treeNode.right)
+                    }
+                }
+
+                result.add(level)
+            }
+
+            return result
+        }
 
 
         /**

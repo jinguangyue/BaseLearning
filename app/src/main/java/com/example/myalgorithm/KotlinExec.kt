@@ -26,7 +26,24 @@ fun main() {
 
 //    testDeleteNodeForIndex()
 
-    testMergeListNodes()
+//    testMergeListNodes()
+
+    testLeverOrder()
+}
+
+fun testLeverOrder() {
+    var node1 = TreeNode(1)
+    var node2 = TreeNode(2)
+    var node3 = TreeNode(3, node1, node2)
+    var node4 = TreeNode(4)
+    var node5 = TreeNode(5, node3, node4)
+
+    var result = ListNodeUtil.levelOder(node5)
+    for (i in result.indices) {
+        for (j in 0 until result[i].size ) {
+            println(result[i][j])
+        }
+    }
 }
 
 fun testMergeListNodes() {
