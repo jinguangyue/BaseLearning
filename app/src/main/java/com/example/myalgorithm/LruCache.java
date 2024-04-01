@@ -72,8 +72,8 @@ public class LruCache<K, V> {
 
 
     public class ListNode<K, V> {
-        ListNode next;
-        ListNode prev;
+        ListNode<K, V> next;
+        ListNode<K, V> prev;
         V val;
         K key;
 
