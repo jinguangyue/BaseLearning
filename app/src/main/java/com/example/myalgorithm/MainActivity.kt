@@ -3,6 +3,7 @@ package com.example.myalgorithm
 import  android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -15,10 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import com.example.myalgorithm.ui.theme.MyAlgorithmTheme
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
+import kotlinx.coroutines.runBlocking
 
 
 fun MainActivity.setContentView(id: Int) {
@@ -53,6 +57,8 @@ class MainActivity : ComponentActivity() {
 
 //        var head = initializeLinkedList()
 
+//        TextView(this).setOnClickListener()
+
 
         var util: Util = Util()
 
@@ -75,13 +81,16 @@ class MainActivity : ComponentActivity() {
 
 //        Log.e("jinguangyue", "result===" + util.kmpSearch("ABABABABCABABABABCABABABABC", "ABABCABAB"))
 
-//        var node1 = TreeNode(1)
-//        var node2 = TreeNode(2)
-//        var node3 = TreeNode(3, node1, node2)
-//        var node4 = TreeNode(4)
-//        var node5 = TreeNode(5, node3, node4)
+        var node1 = TreeNode(4)
+        var node2 = TreeNode(5)
+        var node3 = TreeNode(2, node1, node2)
+
+        var node6 = TreeNode(6)
+        var node7 = TreeNode(7)
+        var node4 = TreeNode(3, node6, node7)
+        var node5 = TreeNode(1, node3, node4)
 //
-//        Log.e("jinguangyue", "maxDepth===" +  util.maxDepth(node5))
+        Log.e("jinguangyue", "levelOrder===" +  util.levelOrder(node5))
 
 
 //        var produceComsumeUtil = ProduceComsumeUtil()
@@ -111,6 +120,31 @@ class MainActivity : ComponentActivity() {
 
         suspend {
 
+        }
+
+        runBlocking {
+            // 使用 async 启动一个异步任务，并返回一个 Deferred<T> 对象
+            val deferredResult: Deferred<String> = async {
+                // 模拟一个耗时操作
+                delay(1000)
+                // 返回结果
+                "Hello"
+            }
+
+            val deferredResultYue: Deferred<String> = async {
+                // 模拟一个耗时操作
+                delay(1000)
+                // 返回结果
+                "yue"
+            }
+
+
+            // 使用 await 方法等待异步任务完成并获取结果
+            val result = deferredResult.await()
+            val resultYue = deferredResultYue.await()
+
+            // 打印结果
+            println("Result: $result - $resultYue")
         }
 
 

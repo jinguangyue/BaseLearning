@@ -1201,6 +1201,12 @@ public class Util {
     /**
      * 使用队列做二叉树的层序遍历
      *
+     *         1
+     *    2        3
+     * 4    5   6     7
+     *
+     *
+     *
      * @param root
      * @return
      */
@@ -1209,27 +1215,41 @@ public class Util {
             return new ArrayList<>();
         }
         List<List<Integer>> result = new ArrayList<>();
+
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while (!queue.isEmpty()) {
-            List<Integer> level = new ArrayList<>();
+        boolean isReverse = false;
+        while (!queue.isEmpty()){
+            LinkedList<Integer> lever = new LinkedList<>();
             int size = queue.size();
-            for (int i = 0; i < size; i++) {
+            for (int i=0; i<size; i++) {
                 TreeNode node = queue.poll();
-                if (node != null) {
-                    level.add(node.val);
+//                System.out.println("jinguangyue---levelOrder:" + node.val);
 
-                    if (node.left != null) {
-                        queue.offer(node.left);
-                    }
+                Log.e("jinguangyue---levelOrder:", node.val + "");
 
-                    if (node.right != null) {
-                        queue.offer(node.right);
-                    }
+                if (isReverse) {
+                    lever.addFirst(node.val);
+                } else {
+                    lever.addLast(node.val);
                 }
+//                lever.add(node.val);
+
+
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+
+
             }
 
-            result.add(level);
+            result.add(lever);
+            isReverse = !isReverse;
+
         }
 
         return result;
