@@ -1,28 +1,20 @@
 package com.example.myalgorithm
 
 import android.content.Intent
-import  android.os.Bundle
+import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.ViewModel
 import com.example.myalgorithm.livedata.LiveDataActivity
-import com.example.myalgorithm.livedata.MyViewModel
-import com.example.myalgorithm.ui.theme.MyAlgorithmTheme
+import com.example.myalgorithm.view.ViewTreeTraversal
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -123,6 +115,23 @@ class MainActivity : ComponentActivity() {
 
         testRetrofit()
 
+        var framelayout = FrameLayout(this)
+        var framelayout1 = FrameLayout(this)
+        var framelayout2 = FrameLayout(this)
+        framelayout.addView(framelayout1)
+        framelayout.addView(framelayout2)
+
+        framelayout1.addView(TextView(this).apply {
+            id = R.id.set_data_button
+            text = "111" })
+        framelayout1.addView(TextView(this).apply { text = "222" })
+
+
+        framelayout2.addView(TextView(this).apply { text = "333" })
+        framelayout2.addView(TextView(this).apply { text = "444" })
+
+
+        ViewTreeTraversal().traverseViewTreeForWhile(framelayout)
     }
 
     private fun testRetrofit() {
