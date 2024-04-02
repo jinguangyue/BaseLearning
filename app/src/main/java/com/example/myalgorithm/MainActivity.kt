@@ -1,5 +1,6 @@
 package com.example.myalgorithm
 
+import android.content.Intent
 import  android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -7,14 +8,20 @@ import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.ViewModel
+import com.example.myalgorithm.livedata.LiveDataActivity
+import com.example.myalgorithm.livedata.MyViewModel
 import com.example.myalgorithm.ui.theme.MyAlgorithmTheme
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -25,32 +32,41 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
-fun MainActivity.setContentView(id: Int) {
-
+@Composable
+fun MyButton(onClick: () -> Unit) {
+    Button(onClick = onClick) {
+        Text("Click me")
+    }
 }
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyAlgorithmTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Hello, Compose!",
-                            color = Color.Black,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
+            Column {
+                MyButton(onClick = {
+                    startActivity(Intent(this@MainActivity, LiveDataActivity::class.java))
+                })
             }
+//            MyAlgorithmTheme {
+//                // A surface container using the 'background' color from the theme
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colorScheme.background
+//                ) {
+//                    Box(
+//                        modifier = Modifier.fillMaxSize(),
+//                        contentAlignment = Alignment.Center
+//                    ) {
+//                        Text(
+//                            text = "Hello, Compose!",
+//                            color = Color.Black,
+//                            textAlign = TextAlign.Center
+//                        )
+//                    }
+//                }
+//            }
         }
 
 //        startActivity(Intent(this, TestTouchEventActivity::class.java))
