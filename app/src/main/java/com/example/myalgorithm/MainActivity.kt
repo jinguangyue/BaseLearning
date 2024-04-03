@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.example.myalgorithm.arraylist.MyArrayList
 import com.example.myalgorithm.livedata.LiveDataActivity
 import com.example.myalgorithm.view.ViewTreeTraversal
 import kotlinx.coroutines.Deferred
@@ -71,8 +72,8 @@ class MainActivity : ComponentActivity() {
         var util: Util = Util()
 
 
-        val arr = intArrayOf(64, 34, 25, 12, 22, 11, 90)
-        util.quickSort(arr, 0, arr.size - 1)
+//        val arr = intArrayOf(64, 34, 25, 12, 22, 11, 90)
+//        util.quickSort(arr, 0, arr.size - 1)
 //        Log.e("jinguangyue", "result===" + util.reverseList(head).`val`);
 //        val arr2 = intArrayOf(1, 2, 3)
 //        Log.e("jinguangyue", "removeDuplicates===" + util.removeDuplicates(arr2))
@@ -89,16 +90,16 @@ class MainActivity : ComponentActivity() {
 
 //        Log.e("jinguangyue", "result===" + util.kmpSearch("ABABABABCABABABABCABABABABC", "ABABCABAB"))
 
-        var node1 = TreeNode(4)
-        var node2 = TreeNode(5)
-        var node3 = TreeNode(2, node1, node2)
-
-        var node6 = TreeNode(6)
-        var node7 = TreeNode(7)
-        var node4 = TreeNode(3, node6, node7)
-        var node5 = TreeNode(1, node3, node4)
+//        var node1 = TreeNode(4)
+//        var node2 = TreeNode(5)
+//        var node3 = TreeNode(2, node1, node2)
 //
-        Log.e("jinguangyue", "levelOrder===" +  util.levelOrder(node5))
+//        var node6 = TreeNode(6)
+//        var node7 = TreeNode(7)
+//        var node4 = TreeNode(3, node6, node7)
+//        var node5 = TreeNode(1, node3, node4)
+////
+//        Log.e("jinguangyue", "levelOrder===" +  util.levelOrder(node5))
 
 
 //        var produceComsumeUtil = ProduceComsumeUtil()
@@ -113,25 +114,38 @@ class MainActivity : ComponentActivity() {
 //        testRotateList()
 
 
-        testRetrofit()
+//        testRetrofit()
+//
+//        var framelayout = FrameLayout(this)
+//        var framelayout1 = FrameLayout(this)
+//        var framelayout2 = FrameLayout(this)
+//        framelayout.addView(framelayout1)
+//        framelayout.addView(framelayout2)
+//
+//        framelayout1.addView(TextView(this).apply {
+//            id = R.id.set_data_button
+//            text = "111" })
+//        framelayout1.addView(TextView(this).apply { text = "222" })
+//
+//
+//        framelayout2.addView(TextView(this).apply { text = "333" })
+//        framelayout2.addView(TextView(this).apply { text = "444" })
+//
+//
+//        ViewTreeTraversal().traverseViewTreeForWhile(framelayout)
 
-        var framelayout = FrameLayout(this)
-        var framelayout1 = FrameLayout(this)
-        var framelayout2 = FrameLayout(this)
-        framelayout.addView(framelayout1)
-        framelayout.addView(framelayout2)
-
-        framelayout1.addView(TextView(this).apply {
-            id = R.id.set_data_button
-            text = "111" })
-        framelayout1.addView(TextView(this).apply { text = "222" })
 
 
-        framelayout2.addView(TextView(this).apply { text = "333" })
-        framelayout2.addView(TextView(this).apply { text = "444" })
+        var myArrayList  = MyArrayList<String>()
+        myArrayList.add("1")
+        myArrayList.add("2")
+        myArrayList.add("3")
 
+        myArrayList.remove(2)
 
-        ViewTreeTraversal().traverseViewTreeForWhile(framelayout)
+        for (i in 0 until myArrayList.size) {
+            Log.e("jinguangyue", myArrayList[i])
+        }
     }
 
     private fun testRetrofit() {
